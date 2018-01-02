@@ -4,7 +4,7 @@ self.addEventListener('install', function(event) {
   console.log('install a');
   const installFunc = function (cache) {
   	console.log('install b');
-  	return cache.addAll(["/hello/index.html"]);
+  	return cache.addAll(["/hello/", "/hello/index.html"]);
   };
   event.waitUntil(caches.open(cacheName).then(installFunc));
 });
