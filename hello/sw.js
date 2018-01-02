@@ -17,7 +17,7 @@ self.addEventListener('fetch', function(event) {
     }
     return fetch(event.request);
 	};
-  //https://developer.mozilla.org/ja/docs/Web/API/FetchEvent/request
+  //https://developer.mozilla.org/en/docs/Web/API/FetchEvent/request
   //https://developer.mozilla.org/en/docs/Web/API/FetchEvent/respondWith
   //https://developer.mozilla.org/en/docs/Web/API/Cache/match
 	event.respondWith(caches.match(event.request).then(responceFunc));

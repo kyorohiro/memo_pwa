@@ -14,13 +14,6 @@ self.addEventListener('fetch', function(event) {
 		if (response) {
       return response;
     }
-    if(event.request.url.replace(/^.*\/hello_newResponse\//,"") != "") {
-      // https://developer.mozilla.org/en/docs/Web/API/Response/Response
-      var body = ""+event.request.url.replace(/^.*\/hello_newResponse\//,"");
-      var init = { "status" : 200 , "statusText" : "OK" };
-      var myResponse = new Response(body, init);
-      return myResponse;
-    }
     return fetch(event.request);
 	};
   //https://developer.mozilla.org/en/docs/Web/API/FetchEvent/request
@@ -29,3 +22,13 @@ self.addEventListener('fetch', function(event) {
 	event.respondWith(caches.match(event.request).then(responceFunc));
 });
 
+
+self.addEventListener('message', function(e) {
+  console.log("# receive message " + e);
+  //
+  // https://developer.mozilla.org/en/docs/Web/API/ServiceWorkerGlobalScope/clients
+  // https://developer.mozilla.org/en/docs/Web/API/Clients
+  self.clients.matchAll().then(clients =>
+    clients.forEach(client => client.postMessage(e.data))
+  );
+}, false);

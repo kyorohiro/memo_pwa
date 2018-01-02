@@ -1,8 +1,9 @@
 <html>
 <head>
-	<title>hello_ownResponse</title>
+	<title>hello_postMessage</title>
 </head>
 <body>
+	<button id="postButton">Post</button>
 	<script type="text/javascript">
 		console.log("Start");
 		if('serviceWorker' in navigator) {
@@ -14,6 +15,13 @@
 				console.log('Failed: serviceworker registration ', err);
 			});
 		}
+		document.getElementById("postButton").onclick = function () {
+			console.log("click button");
+			navigator.serviceWorker.controller.postMessage('Hello World');
+		};
+		navigator.serviceWorker.addEventListener('message', function(e) {
+		  console.log('Worker said: ', e.data);
+		}, false);
 	</script>
 </body>
 </html>
