@@ -11,6 +11,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+  console.log("fetch (1)");
 	const responceFunc = function(response) {
 		if (response) {
       return response;
@@ -31,7 +32,7 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-  console.log("activate");
+  console.log("activate (1)");
   caches.keys().then(function(cacheNames){
     return Promise.all(
       cacheNames.map(function(_cacheName) {
