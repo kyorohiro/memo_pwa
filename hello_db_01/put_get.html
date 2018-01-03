@@ -1,0 +1,88 @@
+<htmL>
+<head>
+	<title>hello db</title>
+</head>
+<body>
+	<div id="log"></div>
+	<script type="text/javascript">
+		var dbName = "MyTestDatabase";
+		var storeName = "Test";
+		var db;
+		var logDom = document.getElementById("log");
+
+		//
+		// https://developer.mozilla.org/en/docs/Web/API/IndexedDB_API/Using_IndexedDB
+		// https://qiita.com/butakoma/items/2c1c956b63fcf956a137
+		if(!window.indexedDB) {
+			logDom.innerHTML += "<div>Not found indexedDB</div>";
+			exit;
+		} else {
+			logDom.innerHTML += "<div>Found indexedDB</div>";
+		}
+		// https://developer.mozilla.org/en/docs/Web/API/IndexedDB_API
+		// https://developer.mozilla.org/en/docs/Web/API/IDBFactory/open
+		// https://developer.mozilla.org/en-US/docs/Web/API/IDBOpenDBRequest
+		// Let us open our database
+		var request = window.indexedDB.open(dbName, 6);
+
+
+
+		const getFunc = function() {
+  		  var db = request.result;
+		  var trans = db.transaction(storeName, 'readonly');
+		  var store = trans.objectStore(storeName);
+		  var getReq = store.get('A1');
+
+		  getReq.onsuccess = function(){
+		  	logDom.innerHTML += "<div> get data success </div>";
+    	  }
+ 
+          trans.oncomplete = function(){
+ 		   // トランザクション完了時(putReq.onsuccessの後)に実行
+		  	logDom.innerHTML += "<div> transaction complete </div>";
+    	  }
+		};
+
+		const putFunc = function() {
+  		  var db = request.result;
+		  var trans = db.transaction(storeName, 'readwrite');
+		  var store = trans.objectStore(storeName);
+		  var putReq = store.put({id : 'A1', name : 'test'});
+
+		  putReq.onsuccess = function(){
+		  	logDom.innerHTML += "<div> put data success </div>";
+    	  }
+ 
+          trans.oncomplete = function(){
+ 		   // トランザクション完了時(putReq.onsuccessの後)に実行
+		  	logDom.innerHTML += "<div> transaction complete </div>";
+		  	getFunc();
+    	  }
+		};
+
+
+
+
+
+		request.onerror = function(event) {
+		  // Do something with request.errorCode!
+		  logDom.innerHTML += "<div>onerror :"+event.target.errorCode+"</div>";
+		};
+		request.onsuccess = function(event) {
+		  // Do something with request.result!
+  		  logDom.innerHTML += "<div>onsuccess :"+event.target.errorCode+"</div>";
+   		  var db = request.result;
+  		  putFunc();
+  		  //db.close();
+		};
+		request.onupgradeneeded = function (event) {
+  		  logDom.innerHTML += "<div>onupgradeneeded :"+event.target.errorCode+"</div>";
+  		  var db = request.result;
+  		  // create object store
+  		  // https://developer.mozilla.org/ja/docs/Web/API/IDBDatabase/createObjectStore
+  		  logDom.innerHTML += "<div>version :"+db.version+"</div>";
+  		  db.createObjectStore(storeName, {keyPath : 'id'})
+		}
+	</script>
+</body>
+</htmL>

@@ -1,0 +1,28 @@
+<htmL>
+<head>
+	<title>hello db</title>
+</head>
+<body>
+	<div id="log"></div>
+	<script type="text/javascript">
+		var db;
+		var logDom = document.getElementById("log");
+		// https://developer.mozilla.org/en/docs/Web/API/IDBFactory/deleteDatabase
+		// https://developer.mozilla.org/en/docs/Web/API/IDBOpenDBRequest
+		var deleteRequest = indexedDB.deleteDatabase("MyTestDatabase");
+		if(!deleteRequest) {
+			logDom.innerHTML += "<div>Not Found DB.</div>";
+			exit;
+		}
+		deleteRequest.onerror = function(event) {
+			logDom.innerHTML += "<div>Error deleting database.</div>";
+		};
+		 
+		deleteRequest.onsuccess = function(event) {
+			logDom.innerHTML += "<div>Database deleted successfully.</div>";
+			logDom.innerHTML += "<div>"+deleteRequest.result+".</div>";
+		};
+
+	</script>
+</body>
+</htmL>
