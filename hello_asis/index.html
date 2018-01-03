@@ -1,0 +1,17 @@
+<html>
+<haed>
+	<title>hello_asis</title>
+</haed>
+<body>
+	<script type="text/javascript">
+		if('serviceWorker' in navigator) {
+			console.log("Check: exist serviceworker");
+			navigator.serviceWorker.register('sw.js?v=0.0.1').then(function(registration){
+				console.log('Passed: serviceworker registration', registration.scope);
+			}).catch(function(err){
+				console.log('Failed: serviceworker registration', registration.scope);				
+			});
+		}
+	</script>
+</body>
+</html>
