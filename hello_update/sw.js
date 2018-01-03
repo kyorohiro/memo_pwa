@@ -2,16 +2,16 @@ var version= '0.0.5';
 var cacheName = 'hello_update-v'+version;
 
 self.addEventListener('install', function(event) {
-  console.log('install (1)');
+  console.log('# install (1)');
   const installFunc = function (cache) {
-  	console.log('install (2)');
+  	console.log('# install (2)');
   	return cache.addAll(["/hello_update/","/hello_update/index.html"]);
   };
   event.waitUntil(caches.open(cacheName).then(installFunc));
 });
 
 self.addEventListener('fetch', function(event) {
-  console.log("fetch (1)");
+  console.log("# fetch (1)");
 	const responceFunc = function(response) {
 		if (response) {
       return response;
@@ -32,7 +32,7 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-  console.log("activate (1)");
+  console.log("# activate (1)");
   caches.keys().then(function(cacheNames){
     return Promise.all(
       cacheNames.map(function(_cacheName) {

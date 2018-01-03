@@ -1,15 +1,16 @@
 var cacheName = 'hello_newResponse-v0.0.1';
 
 self.addEventListener('install', function(event) {
-  console.log('install a');
+  console.log('# install (1)');
   const installFunc = function (cache) {
-  	console.log('install b');
+  	console.log('# install (2)');
   	return cache.addAll(["/hello_postMessage/","/hello_postMessage/index.html"]);
   };
   event.waitUntil(caches.open(cacheName).then(installFunc));
 });
 
 self.addEventListener('fetch', function(event) {
+  console.log("# fetch : " + event.request.url);
 	const responceFunc = function(response) {
 		if (response) {
       return response;

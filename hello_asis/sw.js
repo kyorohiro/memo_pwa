@@ -1,15 +1,16 @@
 var cacheName = 'hello-v0.0.1';
 
 self.addEventListener('install', function(event){
-	console.log('install (1)');
+	console.log('# install (1)');
 	const installFunc = function(cache) {
-		console.log('install (2)');
+		console.log('# install (2)');
   		return cache.addAll(["/hello_asis/", "/hello_asis/index.html"]);
 	};
 	event.waitUntil(caches.open(cacheName).then());
 });
 
 self.addEventListener('fetch', function(event){
+	console.log("# fetch : " + event.request.url);
 	const fetchResponseFunc = function(response) {
 		// non cahce, if we received a valid response
 		if(!response || response.status !== 200 || response.type !== 'basic') {

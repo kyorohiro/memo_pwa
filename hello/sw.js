@@ -1,9 +1,9 @@
 var cacheName = 'hello-v0.0.1';
 
 self.addEventListener('install', function(event) {
-  console.log('install a');
+  console.log('# install (1)');
   const installFunc = function (cache) {
-  	console.log('install b');
+  	console.log('# install (2)');
   	return cache.addAll(["/hello/", "/hello/index.html"]);
   };
   event.waitUntil(caches.open(cacheName).then(installFunc));
@@ -11,7 +11,7 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('fetch', function(event) {
 	const responceFunc = function(response) {
-		console.log("##"+JSON.stringify(response));
+		console.log("# fetch : " + event.request.url);
 		if (response) {
       return response;
     }
