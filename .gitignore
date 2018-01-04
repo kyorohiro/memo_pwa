@@ -1,1 +1,7 @@
 .DS_Store
+dart_hello/build/*
+dart_hello/.pub/*
+dart_hello/.packages
+dart_hello/pubspec.lock
+
+

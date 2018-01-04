@@ -1,0 +1,17 @@
+name: hello_pwa
+version: 0.1.0
+author: kyorohiro
+description: Hello PWA
+environment:
+  sdk: ">=1.19.0 <2.0.0 "
+
+dependencies:
+  pwa: 0.1.8
+
+dev_dependencies:
+  browser: '>=0.10.0 <0.11.0'
+  dart_to_js_script_rewriter: '^1.0.1'
+
+transformers:
+- dart_to_js_script_rewriter
+
