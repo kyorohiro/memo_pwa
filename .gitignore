@@ -3,5 +3,8 @@ dart_hello/build/*
 dart_hello/.pub/*
 dart_hello/.packages
 dart_hello/pubspec.lock
-
+dart_hello_auto/build/*
+dart_hello_auto/.pub/*
+dart_hello_auto/.packages
+dart_hello_auto/pubspec.lock
 
