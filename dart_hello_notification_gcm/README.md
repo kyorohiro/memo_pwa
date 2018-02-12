@@ -2,9 +2,9 @@
 
 0. create FCM account
 
-0.1 setup gloud message
+0.1. setup gloud message
 
-0.2 get Public-facing , Server key
+0.2. get Public-facing , Server key
 
 1. change manifest.json
 
